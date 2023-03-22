@@ -1,32 +1,30 @@
-{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employees hierarchy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
 {% load mptt_tags %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-
-        </div>
-        <div class="card-body">
-          <ul class="list-group">
-            {% recursetree nodes %}
+<!-- Добавляем классы "container" и "my-5" для создания контейнера с отступами -->
+<div class="container my-5">
+    <!-- Добавляем классы "list-group" и "list-group-flush" для создания списка без рамок и отступов -->
+    <ul class="list-group list-group-flush">
+        {% recursetree nodes %}
+            <!-- Добавляем класс "list-group-item" для создания элементов списка -->
             <li class="list-group-item">
-              <h3 class="card-title">Full Name: {{ node.name }}</h3>
-              <h3 class="card-subtitle mb-2 text-muted">Position: {{ node.position }}</h3>
-              {% if not node.is_leaf_node %}
-              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{ node.pk }}" aria-expanded="false" aria-controls="collapse{{ node.pk }}">Show Children</button>
-              <div class="collapse" id="collapse{{ node.pk }}">
-                <ul class="list-group">
-                  {{ children }}
-                </ul>
-              </div>
-              {% endif %}
+                {{ node.name }} ({{ node.position }})
+                <br>
+                {% if node.children %}
+                    <!-- Добавляем класс "list-group" для создания вложенного списка -->
+                    <ul class="list-group">
+                        {{ children }}
+                    </ul>
+                {% endif %}
             </li>
-            {% endrecursetree %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+        {% endrecursetree %}
+    </ul>
 </div>
