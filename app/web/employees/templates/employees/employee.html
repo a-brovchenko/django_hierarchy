@@ -1,0 +1,32 @@
+{% load static %}
+{% load mptt_tags %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            {% recursetree nodes %}
+            <li class="list-group-item">
+              <h3 class="card-title">Full Name: {{ node.name }}</h3>
+              <h3 class="card-subtitle mb-2 text-muted">Position: {{ node.position }}</h3>
+              {% if not node.is_leaf_node %}
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{ node.pk }}" aria-expanded="false" aria-controls="collapse{{ node.pk }}">Show Children</button>
+              <div class="collapse" id="collapse{{ node.pk }}">
+                <ul class="list-group">
+                  {{ children }}
+                </ul>
+              </div>
+              {% endif %}
+            </li>
+            {% endrecursetree %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
