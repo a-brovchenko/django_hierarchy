@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee List</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        padding: 8px;
+        text-align: left;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    {% block content %}
+    <div class="container">
+      <h1>Employee List</h1>
+
+      <form method="get">
+        <div class="form-group">
+          <label for="search">Search:</label>
+          <input type="text" class="form-control" id="search" name="q" value="{{ query }}">
+        </div>
+
+        <div class="form-group">
+          <label for="sort">Sort by:</label>
+          <select class="form-control" id="sort" name="sort">
+            <option value="name" {% if sort_by == "name" %}selected{% endif %}>Name</option>
+            <option value="position" {% if sort_by == "position" %}selected{% endif %}>Position</option>
+            <option value="email" {% if sort_by == "email" %}selected{% endif %}>Email</option>
+            <option value="employment_date" {% if sort_by == "employment_date" %}selected{% endif %}>Employment Date</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Email</th>
+            <th>Employment Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employee in employees %}
+          <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.employment_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endblock %}
+  </body>
+</html>

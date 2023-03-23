@@ -5,6 +5,6 @@ from employees.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', employee_tree),
-
+    path('tree/', employee_tree),
+    path('list/', employee_list),
 ]
