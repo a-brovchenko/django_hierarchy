@@ -1,0 +1,17 @@
+{% block content %}
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+    <button onclick="location.href='{% url 'employees:index' %}'">Go to homepage</button>
+  </form>
+  {% if form.errors %}
+    <p>Errors:</p>
+    <ul>
+    {% for error in form.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile Page</title>
+</head>
+<body>
+	<h1>Welcome to your profile page, {{ user.username }}!</h1>
+	<button onclick="location.href='{% url 'employees:index' %}'">Go to homepage</button>
+</body>
+</html>

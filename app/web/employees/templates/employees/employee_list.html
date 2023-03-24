@@ -22,6 +22,7 @@
     {% block content %}
     <div class="container">
       <h1>Employee List</h1>
+      <button onclick="location.href='{% url 'employees:index' %}'">Go to homepage</button>
 
       <form method="get">
         <div class="form-group">

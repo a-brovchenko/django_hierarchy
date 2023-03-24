@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: gray;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+    <title>Hierarchy employees</title>
+</head>
+<body>
+    <h1>Hierarchy employees</h1>
+    <div>
+        <a href="{% url 'employees:register' %}" class="btn">Registration</a>
+        <a href="{% url 'employees:tree' %}" class="btn">Part 1</a>
+        <a href="{% url 'employees:list' %}" class="btn">Part 2</a>
+        <a href="{% url 'employees:login' %}" class="btn">login</a>
+        <a href="{% url 'employees:logout' %}" class="btn">logout</a>
+        {% if user.is_authenticated %}
+             <a href="{% url 'profile' %}" class="btn">My profile</a>
+        {% endif %}
+    </div>
+</body>
+</html>

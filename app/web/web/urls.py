@@ -1,10 +1,8 @@
 from django.contrib import admin
-from django.urls import path
 from employees.views import *
-
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tree/', employee_tree),
-    path('list/', employee_list),
+    path('', include('employees.urls', namespace='employees')),
 ]

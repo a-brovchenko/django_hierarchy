@@ -1,6 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
-from rest_framework.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 class Employee(MPTTModel):
@@ -17,3 +17,4 @@ class Employee(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['name']
         max_level = 7
+
