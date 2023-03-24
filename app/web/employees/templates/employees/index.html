@@ -24,7 +24,7 @@
         <a href="{% url 'employees:login' %}" class="btn">login</a>
         <a href="{% url 'employees:logout' %}" class="btn">logout</a>
         {% if user.is_authenticated %}
-             <a href="{% url 'profile' %}" class="btn">My profile</a>
+             <a href="{% url 'employees:profile' %}" class="btn">My profile</a>
         {% endif %}
     </div>
 </body>

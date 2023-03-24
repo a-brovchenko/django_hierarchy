@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Employee</title>
+    <style>
+      form div {
+        display: flex;
+        align-items: left;
+        margin-bottom: 10px;
+      }
+
+      label {
+        width: 150px;
+        text-align: left;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Update Employee</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="name">Employee name:</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <div>
+        <label for="new_name">New name:</label>
+        <input type="text" id="new_name" name="new_name">
+      </div>
+      <div>
+        <label for="new_position">New position:</label>
+        <input type="text" id="new_position" name="new_position">
+      </div>
+      <div>
+        <label for="new_email">New email:</label>
+        <input type="text" id="new_email" name="new_email">
+      </div>
+      <div>
+        <label for="new_employment_date">New employment date:</label>
+        <input type="text" id="new_employment_date" name="new_employment_date">
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </body>
+</html>

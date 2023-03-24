@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete Employee</title>
+  </head>
+  <body>
+    <h1>Delete Employee</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="name">Employee name:</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>

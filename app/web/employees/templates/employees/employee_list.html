@@ -16,13 +16,33 @@
       tr:nth-child(even) {
         background-color: #f2f2f2;
       }
+
+      .button-container {
+        text-align: right;
+
+      }
+      h1 {
+        text-align: center;
+        display: centre;
+      }
+
+      .button-container button {
+        margin-left: 30px;
+      }
     </style>
   </head>
   <body>
     {% block content %}
     <div class="container">
-      <h1>Employee List</h1>
-      <button onclick="location.href='{% url 'employees:index' %}'">Go to homepage</button>
+      <h1>Employee list</h1>
+      {% if user.is_authenticated %}
+        <div class="button-container">
+          <button onclick="location.href='{% url 'employees:create_employee' %}'">Create</button>
+          <button onclick="location.href='{% url 'employees:update_employee' %}'">Update</button>
+          <button onclick="location.href='{% url 'employees:delete_employee' %}'">Delete</button>
+          <button onclick="location.href='{% url 'employees:index' %}'">Go to homepage</button>
+        </div>
+      {% endif %}
 
       <form method="get">
         <div class="form-group">
@@ -41,6 +61,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+
       </form>
 
       <table class="table">

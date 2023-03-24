@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
+from .form import EmployeeForm
 from .models import Employee
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -69,21 +70,12 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'employees/login.html', {'form': form})
 
-
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('/index/')
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
 
-    else:
-        form = UserCreationForm()
-    return render(request, 'employees/register.html', {'form': form})
 
 
 @login_required
@@ -91,3 +83,46 @@ def profile(request):
     user = request.user
     context = {'user': user}
     return render(request, 'employees/profile.html', context)
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def create_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employees:list')
+    else:
+        form = EmployeeForm()
+
+    context = {'form': form}
+    return render(request, 'employees/create_employee.html', context)
+
+
+@login_required
+def delete_employee(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        employee = get_object_or_404(Employee, name=name)
+        employee.delete()
+        return redirect('employees:list')
+
+    return render(request, 'employees/delete_employee.html')
+
+
+@login_required
+def update_employee(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        employee = get_object_or_404(Employee, name=name)
+
+        employee.name = request.POST.get('new_name', employee.name)
+        employee.position = request.POST.get('new_position', employee.position)
+        employee.email = request.POST.get('new_email', employee.email)
+        employee.employment_date = request.POST.get('new_employment_date', employee.employment_date)
+        employee.save()
+
+        return redirect('employees:list')
+
+    return render(request, 'employees/update_employee.html')
