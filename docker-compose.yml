@@ -7,7 +7,7 @@ services:
     container_name: django_db
     user: "1000:1000"
     volumes:
-      - django_db:/var/lib/mysql
+      - django_database:/var/lib/mysql
     restart: always
     ports:
       - "3306:3306"
@@ -33,23 +33,28 @@ services:
       - MYSQL_ROOT_PASSWORD
 
   # python
-#  django:
-#    depends_on:
-#      - db
-#    container_name: bot
-#    restart: always
-#    build:
-#      context: app
-#      dockerfile: ../Dockerfile
-#    environment:
-#      - DB_HOST
+  django:
+    tty: true
+    depends_on:
+      - db
+    container_name: django
+    restart: always
+    ports:
+      - "8081:8000"
+    image: django_hierarchy:latest
+    build:
+      context: app
+      dockerfile: ../Dockerfile
+    environment:
+      - DB_HOST
+      - EMPLOYEES_NUM
 
 
 
 volumes:
-  django_db:
+  django_database:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "${HOME}/django_db"
+      device: "${HOME}/django_database"

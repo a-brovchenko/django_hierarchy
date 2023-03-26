@@ -17,7 +17,7 @@
         {% recursetree nodes %}
             <!-- Добавляем класс "list-group-item" для создания элементов списка -->
             <li class="list-group-item">
-                {{ node.name }} ({{ node.position }})
+                Name - {{ node.name }},  (Position - {{ node.position }})
                 <br>
                 {% if node.children %}
                     <!-- Добавляем класс "list-group" для создания вложенного списка -->

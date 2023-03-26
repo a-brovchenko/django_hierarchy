@@ -1,3 +1,4 @@
 .venv
 .idea
-/app/web/.env
+__pycache__
+/**/.env

@@ -16,6 +16,7 @@ dotenv_variables = {
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = dotenv_variables['DJANGO_SECRET']
+# SECRET_KEY = utils.get_random_secret_key()
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
